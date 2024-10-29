@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            padding: 14px;
+            margin: 14px;
+            background-color: cornflowerblue;
+        }
+        .childcontainer{
+            padding: 14px;
+            margin: 14px;
+            background-color: crimson
+        }
+        .child{
+            border: 2px solid black;
+            padding: 14px;
+            margin: 14px;
+            background-color: white;
+        }
+    </style>
+</head> 
+<body>
+    <div class="container">
+        <section class="childcontainer">
+            <div class="child">
+                Hey, I am a child.
+            </div>
+        </section>
+    </div>
+    <script>
+        // document.querySelector(".child").addEventListener("click", (e, handler)=>{
+        
+        //     alert ("Child is clicked.")
+        // })
+
+        document.querySelector(".childcontainer").addEventListener("click", ()=>{
+                e.stopPropagation()
+            alert ("Childcontainer is clicked.")
+        })
+        
+        document.querySelector(".container").addEventListener("click", ()=>{
+                e.stopPropagation()
+            alert ("Container is clicked.")
+        })
+
+        let childClickHandler = (e)=>{ // MUST USE CONST VARIABLE.
+            alert ("Child is clicked.")
+        
+        }
+
+        // document.querySelector(".child").addEventListener("click", childClickHandler);
+        // document.querySelector(".child").removeEventListener("click", childClickHandler);
+
+
+
+        //SET INTERVAL FUCNTON:
+
+        function randomColor() {
+            let val1 = Math.ceil(0 + Math.random() * 255);
+            let val2 = Math.ceil(0 + Math.random() * 255);
+            let val3 = Math.ceil(0 + Math.random() * 255);
+            // console.log(`rgb(${val1}, ${val2}, ${val3})`) 
+            return `rgb(${val1}, ${val2}, ${val3})`
+        }    
+/*    
+        let a = setInterval(() => {
+            document.querySelector(".childcontainer").style.backgroundColor = randomColor()
+            document.querySelector(".container").style.backgroundColor = randomColor()
+        }, 1000); // 1000ms = 1s
+
+        
+        document.querySelector(".child").addEventListener( "click",(e)=>{
+        clearInterval(a); // this will stop the a whch has set interval function and it will be paused when this event is fired. So to cancle the setinterval clear inteval is used.
+    })
+*/
+
+    // SET TIME OUT:
+
+    let a = setTimeout(() => {
+            document.querySelector(".childcontainer").style.backgroundColor = randomColor()
+            document.querySelector(".container").style.backgroundColor = randomColor()
+        },3000); // 3000ms = 3s
+
+        document.querySelector(".child").addEventListener( "click",(e)=>{
+            clearTimeout(a); // To cancle the set time out claer time out is used. if you do this action before the time of the settime out you will cancle the settimeout funcion.
+        })
+ 
+    </script>
+</body>
+</html>
